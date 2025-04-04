@@ -48,8 +48,3 @@ Ein Schiffe-Versenken-Spiel, das über zwei Computer im lokalen Netzwerk funktio
 - [ ] Schiffe setzen (manuell oder zufällig)
 - [ ] Trefferlogik + Kommunikation
 - [ ] Datenbank vorbereiten und schreiben
-
-## 👥 Team
-
-- Alexander Jäger
-- Patrick Korber
