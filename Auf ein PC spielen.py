@@ -1,48 +1,124 @@
-import cv2
+import random
 
-# Lade das vortrainierte Haar-Cascade-Modell für die Gesichtserkennung
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+GROESSE = 5
+flotte = [3, 2]
 
-# Starte die Webcam
-cap = cv2.VideoCapture(0)
+# Spielfelder initialisieren
+def neues_meer():
+    return [[0 for _ in range(GROESSE)] for _ in range(GROESSE)]
 
-# Überprüfe, ob die Webcam erfolgreich geöffnet wurde
-if not cap.isOpened():
-    print("Fehler: Webcam konnte nicht geöffnet werden.")
-    exit()
+def zeige_meer(meer, verdeckt=False):
+    symbole = ["~", "S", "°", "T"]  # Wasser, Schiff, verfehlt, getroffen
+    for y in reversed(range(GROESSE)):
+        zeile = ""
+        for x in range(GROESSE):
+            feld = meer[x][y]
+            if verdeckt and feld == 1:
+                zeile += symbole[0] + " "  # Schiff verstecken
+            else:
+                zeile += symbole[feld] + " "
+        print(zeile)
 
-# Parameter für die Gesichtserkennung
-scaleFactor = 1.1
-minNeighbors = 5
-minSize = (30, 30)
+def setze_schiff(meer, x, y, richtung, laenge):
+    x -= 1
+    y -= 1
+    if richtung:  # waagerecht
+        if x + laenge > GROESSE or any(meer[x+i][y] != 0 for i in range(laenge)):
+            return False
+        for i in range(laenge):
+            meer[x+i][y] = 1
+    else:  # senkrecht (nach oben)
+        if y + laenge > GROESSE or any(meer[x][y+i] != 0 for i in range(laenge)):
+            return False
+        for i in range(laenge):
+            meer[x][y+i] = 1
+    return True
 
-try:
+def schiessen(meer, x, y):
+    x -= 1
+    y -= 1
+    if meer[x][y] == 1:
+        meer[x][y] = 3
+        print("Treffer!")
+    elif meer[x][y] == 0:
+        meer[x][y] = 2
+        print("Wasser!")
+    else:
+        print("Hier hast du schon geschossen!")
+
+def alle_versenkt(meer):
+    return all(feld != 1 for reihe in meer for feld in reihe)
+
+def spieler_schiff_setzen(meer, laenge):
     while True:
-        # Lese einen Frame von der Webcam
-        ret, frame = cap.read()
-        if not ret:
-            print("Fehler beim Lesen des Frames von der Kamera.")
+        try:
+            x = int(input("x: "))
+            y = int(input("y: "))
+            richtung = input("Waagerecht? (j/n): ").lower() == "j"
+            if setze_schiff(meer, x, y, richtung, laenge):
+                break
+            else:
+                print("Ungültige Platzierung!")
+        except:
+            print("Eingabefehler. Versuche es nochmal.")
+
+def computer_schiff_setzen(meer, laenge):
+    while True:
+        x = random.randint(1, GROESSE)
+        y = random.randint(1, GROESSE)
+        richtung = random.choice([True, False])
+        if setze_schiff(meer, x, y, richtung, laenge):
             break
 
-        # Konvertiere das Bild in Graustufen (erforderlich für Haar-Cascade)
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+def spieler_zug(meer):
+    while True:
+        try:
+            x = int(input("x: "))
+            y = int(input("y: "))
+            if meer[x-1][y-1] in [2, 3]:
+                print("Hier hast du schon hingeschossen!")
+            else:
+                schiessen(meer, x, y)
+                break
+        except:
+            print("Ungültige Eingabe!")
 
-        # Erkenne Gesichter im Bild
-        faces = face_cascade.detectMultiScale(gray, scaleFactor=scaleFactor, minNeighbors=minNeighbors, minSize=minSize)
-
-        # Zeichne Rechtecke um die erkannten Gesichter
-        for (x, y, w, h) in faces:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-        # Zeige das Bild mit den erkannten Gesichtern
-        cv2.imshow('Gesichtserkennung von Niklas', frame)
-
-        # Beende die Schleife, wenn die Taste 'q' gedrückt wird
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            print("Die Gesichtserkennung wurde beendet!")
+def computer_zug(meer):
+    while True:
+        x = random.randint(1, GROESSE)
+        y = random.randint(1, GROESSE)
+        if meer[x-1][y-1] not in [2, 3]:
+            print(f"Computer schießt auf {x}, {y}")
+            schiessen(meer, x, y)
             break
-            
-finally:
-    # Gib die Ressourcen frei
-    cap.release()
-    cv2.destroyAllWindows()
+
+# Hauptprogramm
+meer_spieler = neues_meer()
+meer_computer = neues_meer()
+
+print("Platziere deine Schiffe!")
+for laenge in flotte:
+    print(f"Schiff mit Länge {laenge}:")
+    spieler_schiff_setzen(meer_spieler, laenge)
+
+print("Computer platziert Schiffe...")
+for laenge in flotte:
+    computer_schiff_setzen(meer_computer, laenge)
+
+spieler_dran = True
+while True:
+    if spieler_dran:
+        print("\n--- Dein Zug ---")
+        spieler_zug(meer_computer)
+        zeige_meer(meer_computer, verdeckt=True)
+        if alle_versenkt(meer_computer):
+            print("Du hast gewonnen!")
+            break
+    else:
+        print("\n--- Computer ist dran ---")
+        computer_zug(meer_spieler)
+        zeige_meer(meer_spieler)
+        if alle_versenkt(meer_spieler):
+            print("Der Computer hat gewonnen!")
+            break
+    spieler_dran = not spieler_dran
