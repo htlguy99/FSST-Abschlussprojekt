@@ -1,5 +1,3 @@
-"""Schiesen funktion muss überarbeitet werden, wenn zahl auserhalb von 0-4 eingegeben wird soll eine warnung kommen und spiel weitergehen"""
-
 # Spielfeld-Erstellung
 def spielfeld():
     return ["~"] * 25
@@ -41,7 +39,7 @@ def schiff_setzen(feld, spieler_nummer):
                 else:
                     print("❗ Nur Zahlen von 0 bis 4!")
             except ValueError:
-                print("❗ Bitte gültige Zahlen eingeben!")
+                print("❗ Bitte gültige Zahlen eingeben! (0 bis 4)")
 
 # Schuss-Funktion für einen Spieler
 def schiessen(feld, spieler_nummer):
@@ -51,8 +49,10 @@ def schiessen(feld, spieler_nummer):
 
     while True:
         try:
-            x = int(input("x (0–4): "))
-            y = int(input("y (0-4): "))
+            x_input = input("x (0–4): ")
+            y_input = input("y (0-4): ")
+            x = int(x_input)
+            y = int(y_input)
             if 0 <= x <= 4 and 0 <= y <= 4:
                 pos = y * 5 + x
                 if feld[pos] == "S":
@@ -67,7 +67,7 @@ def schiessen(feld, spieler_nummer):
             else:
                 print("❗ Nur Zahlen von 0 bis 4!")
         except ValueError:
-            print("❗ Bitte gültige Zahlen eingeben!")
+            print("❗ Bitte gültige Zahlen eingeben! (0 bis 4)")
 
 # Überprüfen, ob noch Schiffe da sind
 def verloren(feld):
