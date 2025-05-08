@@ -1,3 +1,5 @@
+"""Schiesen funktion muss überarbeitet werden, wenn zahl auserhalb von 0-4 eingegeben wird soll eine warnung kommen und spiel weitergehen"""
+
 # Spielfeld-Erstellung
 def spielfeld():
     return ["~"] * 25
