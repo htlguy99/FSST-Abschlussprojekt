@@ -1,3 +1,6 @@
+"""Namen funktion hinzugefügt sowie x-y koordinaten und angefangen mit weiterspielen funktion""" 
+
+
 def namen():
     name1 = input("Spieler 1 gib deinen Namen ein: ")
     name2 = input("Spieler 2 gib deinen Namen ein: ")
