@@ -1,8 +1,6 @@
 import socket
 import pickle
 
-"""Client-Code"""
-
 def spielfeld():
     return ["~"] * 25
 
@@ -44,47 +42,52 @@ def empfangen(conn):
     return pickle.loads(conn.recv(4096))
 
 def client():
-    host = input("Server-IP eingeben: ")
+    host = input("🔌 Server-IP eingeben: ")
     port = 12345
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((host, port))
-        print("Verbunden mit Server.")
+        try:
+            s.connect((host, port))
+        except ConnectionRefusedError:
+            print("❌ Verbindung fehlgeschlagen. Ist der Server gestartet?")
+            return
+
+        print("✅ Verbunden mit Server.")
 
         feld_client = spielfeld()
         schiff_setzen(feld_client)
 
         senden(s, feld_client)
         feld_server = empfangen(s)
-        print("Gegnerische Schiffe erhalten.")
+        print("📦 Gegnerische Schiffe erhalten.")
 
         while True:
             # Server schießt
-            print("Warte auf Schuss des Gegners...")
+            print("⏳ Warte auf Schuss des Gegners...")
             data = empfangen(s)
             if data == "verloren":
-                print("Du hast verloren!")
+                print("💥 Du hast verloren!")
                 break
             x, y = data
             pos = y * 5 + x
             if feld_client[pos] == "S":
                 feld_client[pos] = "X"
-                print("Dein Schiff wurde getroffen!")
+                print("🚨 Dein Schiff wurde getroffen!")
             elif feld_client[pos] in ["X", "0"]:
-                print("Doppelschuss!")
+                print("❗ Doppelschuss!")
             else:
                 feld_client[pos] = "0"
-                print("Gegner hat verfehlt.")
+                print("💨 Gegner hat verfehlt.")
             senden(s, feld_client)
 
             status = empfangen(s)
             if status == "verloren":
-                print("Du hast gewonnen!")
+                print("🏆 Du hast gewonnen!")
                 break
 
             # Jetzt Client schießt
             zeige_feld(["~" if c == "S" else c for c in feld_server])
-            print("Dein Zug!")
+            print("🎯 Dein Zug!")
             while True:
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
@@ -93,10 +96,10 @@ def client():
                     else:
                         print("Nur Koordinaten 0-4!")
                 except:
-                    print("Ungültig!")
+                    print("Ungültige Eingabe!")
 
             senden(s, (x, y))
             feld_server = empfangen(s)
-            print("Gegnerisches Feld aktualisiert.")
+            print("🛠️ Gegnerisches Feld aktualisiert.")
 
-    client()
+client()
