@@ -77,15 +77,9 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
-            spielwiederholen = input("🔁 Noch eine Runde? (j/n): ").strip().lower()
-            if spielwiederholen not in ["j", "ja"]:
-                print("👋 Danke fürs Spielen!")
-                break
-            else:
-                feld_server = spielfeld()
-                schiff_setzen(feld_server)
-                senden(conn, feld_server)
 
+            # Frage nach einer neuen Runde
+           
 
 if __name__ == "__main__":
     server()

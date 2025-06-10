@@ -50,7 +50,7 @@ def client():
 
             status = empfangen(s)
             if status == "verloren":
-                print("🏆 Du hast gewonnen!")
+                print("Du hast verloren :( )")
                 break
             elif status != "weiter":
                 print(f"Unbekannter Status: {status}")
@@ -79,6 +79,13 @@ def client():
                 print("💨 Verfehlt!")
             elif schuss_status == "doppelschuss":
                 print("❗ Doppelschuss!")
+
+            if verloren(feld_server):
+                print("💥 Du hast verloren.")
+                senden(s, "verloren")
+                break  
+            
+
 
                 
 
