@@ -1,44 +1,87 @@
 import pickle
 
+# Größeres Spielfeld: 7x7 = 49 Felder
+FELD_GROESSE = 10
+
 def spielfeld():
-    return ["~"] * 25
+    return ["~"] * (FELD_GROESSE * FELD_GROESSE)
+
+# Mehr Schiffe
+schiffe = {
+    "Schiff1": {"laenge": 2, "anzahl": 2},
+    "Schiff2": {"laenge": 3, "anzahl": 1},
+    "Schiff3": {"laenge": 4, "anzahl": 1}
+}
 
 def zeige_feld(feld, verdeckt=False):
-    print("  0 1 2 3 4")
-    for i in range(5):
-        reihe = feld[i*5:(i+1)*5]
+    print("  " + " ".join(str(i) for i in range(FELD_GROESSE)))
+    for y in range(FELD_GROESSE):
+        reihe = feld[y * FELD_GROESSE:(y + 1) * FELD_GROESSE]
         if verdeckt:
             reihe = ["~" if c == "S" else c for c in reihe]
-        print(f"{i} " + " ".join(reihe))
+        print(f"{y} " + " ".join(reihe))
 
 def verloren(feld):
     return "S" not in feld
 
 def schiff_setzen(feld):
-    print("Setze 2 Schiffe (jeweils Länge 1):")
-    for i in range(2):
-        while True:
-            zeige_feld(feld)
-            eingabe = input(f"Schiff {i+1} Koordinaten (x y): ").split()
-            if len(eingabe) != 2:
-                print("❌ Zwei Zahlen mit Leerzeichen eingeben!")
-                continue
-            try:
-                x, y = map(int, eingabe)
-                if 0 <= x <= 4 and 0 <= y <= 4:
-                    pos = y * 5 + x
-                    if feld[pos] == "~":
+    print("Setze deine Schiffe:")
+    for name, info in schiffe.items():
+        for i in range(info["anzahl"]):
+            while True:
+                zeige_feld(feld)
+                eingabe = input(f"{name} (Länge {info['laenge']}) {i+1} Koordinaten + Richtung (x y h/v): ").split()
+                if len(eingabe) != 3:
+                    print("❌ Drei Eingaben nötig: x y h/v")
+                    continue
+                try:
+                    x, y = map(int, eingabe[:2])
+                    richtung = eingabe[2].lower()
+                    if richtung not in ["h", "v"]:
+                        print("❌ Richtung muss 'h' (horizontal) oder 'v' (vertikal) sein.")
+                        continue
+
+                    # Prüfen, ob Platz vorhanden ist
+                    pos_liste = []
+                    passt = True
+                    for j in range(info["laenge"]):
+                        nx = x + j if richtung == "h" else x
+                        ny = y if richtung == "h" else y + j
+                        if 0 <= nx < FELD_GROESSE and 0 <= ny < FELD_GROESSE:
+                            pos = ny * FELD_GROESSE + nx
+                            if feld[pos] == "~":
+                                pos_liste.append(pos)
+                            else:
+                                print("❌ Ein Feld ist schon belegt.")
+                                passt = False
+                                break
+                        else:
+                            print("❌ Schiff passt nicht aufs Feld.")
+                            passt = False
+                            break
+
+                    if not passt:
+                        continue
+
+                    for pos in pos_liste:
                         feld[pos] = "S"
-                        break
-                    else:
-                        print("❌ Feld schon belegt.")
-                else:
-                    print("❌ Nur Koordinaten 0 bis 4.")
-            except ValueError:
-                print("❌ Ungültige Eingabe!")
+                    break
+                except ValueError:
+                    print("❌ Ungültige Eingabe!")
+
 
 def senden(conn, data):
     conn.sendall(pickle.dumps(data))
 
 def empfangen(conn):
     return pickle.loads(conn.recv(4096))
+
+def spielwiederholen():
+    while True:
+        antwort = input("Neues Spiel starten? (j/n): ").strip().lower()
+        if antwort in ["j", "ja"]:
+            return True
+        elif antwort in ["n", "nein"]:
+            return False
+        else:
+            print("Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
