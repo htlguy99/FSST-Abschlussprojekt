@@ -1,5 +1,6 @@
 import socket
 from funktionen import *
+from funktionen import FELD_GROESSE  
 
 def server():
     host = '0.0.0.0'
@@ -25,7 +26,8 @@ def server():
             while True:
                 try:
                     x, y = map(int, input("🎯 Dein Schuss (x y): ").split())
-                    if 0 <= x <= 4 and 0 <= y <= 4:
+                    
+                    if 0 <= x < FELD_GROESSE and 0 <= y < FELD_GROESSE:
                         break
                     print("❌ Nur Koordinaten 0–4!")
                 except:
@@ -57,7 +59,7 @@ def server():
                 print("💥 Du hast verloren.")
                 break
             x, y = data
-            pos = y * 5 + x
+            pos = y * FELD_GROESSE + x
             if feld_server[pos] == "S":
                 feld_server[pos] = "X"
                 schuss_status = "treffer"
@@ -70,6 +72,7 @@ def server():
                 schuss_status = "verfehlt"
                 print("💨 Gegner hat verfehlt.")
             senden(conn, (feld_server, schuss_status))
+
 
 if __name__ == "__main__":
     server()

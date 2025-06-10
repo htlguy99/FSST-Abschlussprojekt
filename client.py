@@ -1,5 +1,9 @@
 import socket
 from funktionen import *
+from funktionen import FELD_GROESSE  # ganz oben einfügen
+
+
+
 
 def client():
     host = input("🔌 Server-IP eingeben: ")
@@ -29,7 +33,7 @@ def client():
                 print("💥 Du hast verloren!")
                 break
             x, y = data
-            pos = y * 5 + x
+            pos = y * FELD_GROESSE + x
 
             if feld_client[pos] == "S":
                 feld_client[pos] = "X"
@@ -57,7 +61,8 @@ def client():
             while True:
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
-                    if 0 <= x <= 4 and 0 <= y <= 4:
+                    
+                    if 0 <= x < FELD_GROESSE and 0 <= y < FELD_GROESSE:
                         break
                     else:
                         print("Nur Koordinaten 0-4!")
@@ -75,7 +80,13 @@ def client():
             elif schuss_status == "doppelschuss":
                 print("❗ Doppelschuss!")
 
+                
+            print("Möchtest du nochmal spielen?")
+            nochmal = spielwiederholen()
+            senden(s, nochmal)          # Client sendet eigene Antwort
+            server_antwort = empfangen(s)  # Client empfängt Antwort vom Server
+
+            
+
 if __name__ == "__main__":
     client()
-
-#test
