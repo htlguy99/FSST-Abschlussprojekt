@@ -1,6 +1,5 @@
 import pickle
 
-# Größeres Spielfeld: 7x7 = 49 Felder
 FELD_GROESSE = 10
 
 def spielfeld():
@@ -8,9 +7,10 @@ def spielfeld():
 
 # Mehr Schiffe
 schiffe = {
-    "Schiff1": {"laenge": 2, "anzahl": 2},
-    "Schiff2": {"laenge": 3, "anzahl": 1},
-    "Schiff3": {"laenge": 4, "anzahl": 1}
+    "Schlachtschiff": {"laenge": 5, "anzahl": 1},
+    "Kreuzer": {"laenge": 4, "anzahl": 1},
+    "Zerstörer": {"laenge": 3, "anzahl": 1},
+    "U-Boot": {"laenge": 2, "anzahl": 1}
 }
 
 def zeige_feld(feld, verdeckt=False):
@@ -30,7 +30,7 @@ def schiff_setzen(feld):
         for i in range(info["anzahl"]):
             while True:
                 zeige_feld(feld)
-                eingabe = input(f"{name} (Länge {info['laenge']}) {i+1} Koordinaten + Richtung (x y h/v): ").split()
+                eingabe = input(f"{name} (Länge {info['laenge']}) {i+1}, Koordinaten + Richtung (x y h/v): ").split()
                 if len(eingabe) != 3:
                     print("❌ Drei Eingaben nötig: x y h/v")
                     continue
@@ -70,6 +70,7 @@ def schiff_setzen(feld):
                     print("❌ Ungültige Eingabe!")
 
 
+
 def senden(conn, data):
     conn.sendall(pickle.dumps(data))
 
@@ -77,7 +78,7 @@ def empfangen(conn):
     return pickle.loads(conn.recv(4096))
 
 def spielwiederholen():
-    while True:
+    if verloren(spielfeld()):
         antwort = input("Neues Spiel starten? (j/n): ").strip().lower()
         if antwort in ["j", "ja"]:
             return True
@@ -85,3 +86,4 @@ def spielwiederholen():
             return False
         else:
             print("Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
+

@@ -19,7 +19,7 @@ def client():
         print("✅ Verbunden mit Server.")
 
         feld_client = spielfeld()
-        schiff_setzen(feld_client)
+        schiff_setzen(feld_client) 
 
         senden(s, feld_client)
         feld_server = empfangen(s)
@@ -81,10 +81,7 @@ def client():
                 print("❗ Doppelschuss!")
 
                 
-            print("Möchtest du nochmal spielen?")
-            nochmal = spielwiederholen()
-            senden(s, nochmal)          # Client sendet eigene Antwort
-            server_antwort = empfangen(s)  # Client empfängt Antwort vom Server
+
 
             
 
