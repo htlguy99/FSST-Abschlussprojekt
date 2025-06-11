@@ -63,7 +63,7 @@ def client():
                     if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
                     else:
-                        print("Nur Koordinaten 0-4!")
+                        print("Nur Koordinaten 0-9!")
                 except:
                     print("Ungültige Eingabe!")
 
