@@ -25,10 +25,10 @@ def client():
 
         while True:
             # Warten auf Schuss des Servers
-            print("⏳ Warte auf Schuss des Gegners...")
+            print(" Warte auf Schuss des Gegners...")
             data = empfangen(s)
             if data == "verloren":
-                print("💥 Du hast verloren!")
+                print(" Du hast verloren!")
                 break
             x, y = data
             pos = y * feld_groesse + x
