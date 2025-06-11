@@ -63,7 +63,7 @@ def server():
                 senden(conn, "weiter")
 
             # Gegner schießt
-            print("⏳ Warte auf gegnerischen Schuss...")
+            print(" Warte auf gegnerischen Schuss...")
             data = empfangen(conn)
             if data == "verloren":
                 print("💥 Du hast verloren.")
