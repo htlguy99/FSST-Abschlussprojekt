@@ -21,21 +21,21 @@ def server():
         s.listen(1)
         print(f"🟢 Server läuft. Warte auf Verbindung auf {host} und Port {port}...")
         conn, addr = s.accept()
-        print("🔗 Verbunden mit:", addr)
+        print(" Verbunden mit:", addr)
 
         feld_server = spielfeld()
         schiff_setzen(feld_server)
         senden(conn, feld_server)
 
         feld_client = empfangen(conn)
-        print("📦 Gegnerisches Feld empfangen.")
+        print(" Gegnerisches Feld empfangen.")
 
         while True:
             # Server schießt
             zeige_feld(feld_client, verdeckt=True)
             while True:
                 try:
-                    x, y = map(int, input("🎯 Dein Schuss (x y): ").split())
+                    x, y = map(int, input(" Dein Schuss (x y): ").split())
                     
                     if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
