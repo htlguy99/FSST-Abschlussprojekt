@@ -2,14 +2,23 @@ import socket
 from funktionen import *
 from funktionen import feld_groesse  
 
+
+def lokale_ip():
+    try:
+        hostname = socket.gethostname()
+        local_ip = socket.gethostbyname(hostname)
+        return local_ip
+    except socket.error as e:
+        return f"Fehler beim Abrufen der IP: {e}"
+
 def server():
-    host = '0.0.0.0'
+    host = lokale_ip()  # Lokale IP-Adresse des Servers
     port = 12345
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
-        print(f"🟢 Server läuft. Warte auf Verbindung auf Port {port}...")
+        print(f"🟢 Server läuft. Warte auf Verbindung auf {lokale_ip} und Port {port}...")
         conn, addr = s.accept()
         print("🔗 Verbunden mit:", addr)
 
