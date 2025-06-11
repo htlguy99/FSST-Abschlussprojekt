@@ -99,4 +99,4 @@ def spielwiederholen():
             print("👋 Auf Wiedersehen!")
             return False
         else:
-            print("❌ Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
+            print("❌ Ungültige Eingabe! Bitte 'ja' oder 'nein' eingeben.")
