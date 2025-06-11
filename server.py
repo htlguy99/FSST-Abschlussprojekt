@@ -81,5 +81,5 @@ def server():
             # Frage nach einer neuen Runde
            
 
-if __name__ == "__main__":
-    server()
+
+server()
