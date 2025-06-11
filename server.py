@@ -87,8 +87,3 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
-
-            # Frage nach einer neuen Runde
-           
-
-
