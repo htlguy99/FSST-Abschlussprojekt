@@ -89,3 +89,4 @@ def senden(conn, data):
 
 def empfangen(conn):
     return pickle.loads(conn.recv(4096))
+##
