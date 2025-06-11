@@ -11,17 +11,17 @@ def client():
         try:
             s.connect((host, port))
         except ConnectionRefusedError:
-            print("❌ Verbindung fehlgeschlagen. Ist der Server gestartet?")
+            print(" Verbindung fehlgeschlagen. Ist der Server gestartet?")
             return
 
-        print("✅ Verbunden mit Server.")
+        print(" Verbunden mit Server.")
 
         feld_client = spielfeld()
         schiff_setzen(feld_client) 
 
         senden(s, feld_client)
         feld_server = empfangen(s)
-        print("📦 Gegnerisches Feld erhalten.")
+        print(" Gegnerisches Feld erhalten.")
 
         while True:
             # Warten auf Schuss des Servers
