@@ -47,7 +47,7 @@ def server():
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
             feld_client, status = empfangen(conn)
-            print(f"🛠️ Gegnerisches Feld aktualisiert.")
+            print(f" Gegnerisches Feld aktualisiert.")
             if status == "treffer":
                 print("🚀 Treffer!")
             elif status == "verfehlt":
