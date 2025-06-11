@@ -90,16 +90,5 @@ def senden(conn, data):
 def empfangen(conn):
     return pickle.loads(conn.recv(4096))
 
-def spielwiederholen():
-    if verloren(spielfeld()):
-        antwort = input("🔁 Neues Spiel starten? (j/n): ").strip().lower()
-        if antwort in ["j", "ja"]:
-            return True
-        elif antwort in ["n", "nein"]:
-            print("👋 Auf Wiedersehen!")
-            return False
-        else:
-            print("❌ Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
 
 
-###hhhhhhhhhhhhhh
