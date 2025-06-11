@@ -1,6 +1,6 @@
 import socket
 from funktionen import *
-from funktionen import FELD_GROESSE  # ganz oben einfügen
+from funktionen import feld_groesse  # ganz oben einfügen
 
 
 
@@ -33,7 +33,7 @@ def client():
                 print("💥 Du hast verloren!")
                 break
             x, y = data
-            pos = y * FELD_GROESSE + x
+            pos = y * feld_groesse + x
 
             if feld_client[pos] == "S":
                 feld_client[pos] = "X"
@@ -62,7 +62,7 @@ def client():
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
                     
-                    if 0 <= x < FELD_GROESSE and 0 <= y < FELD_GROESSE:
+                    if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
                     else:
                         print("Nur Koordinaten 0-4!")

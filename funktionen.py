@@ -1,9 +1,9 @@
 import pickle
 
-FELD_GROESSE = 10
+feld_groesse = 10
 
 def spielfeld():
-    return ["~"] * (FELD_GROESSE * FELD_GROESSE)
+    return ["~"] * (feld_groesse * feld_groesse)
 
 # Mehr Schiffe
 schiffe = {
@@ -14,9 +14,9 @@ schiffe = {
 }
 
 def zeige_feld(feld, verdeckt=False):
-    print("  " + " ".join(str(i) for i in range(FELD_GROESSE)))
-    for y in range(FELD_GROESSE):
-        reihe = feld[y * FELD_GROESSE:(y + 1) * FELD_GROESSE]
+    print("  " + " ".join(str(i) for i in range(feld_groesse)))
+    for y in range(feld_groesse):
+        reihe = feld[y * feld_groesse:(y + 1) * feld_groesse]
         if verdeckt:
             reihe = ["~" if c == "S" else c for c in reihe]
         print(f"{y} " + " ".join(reihe))
@@ -47,8 +47,8 @@ def schiff_setzen(feld):
                     for j in range(info["laenge"]):
                         nx = x + j if richtung == "h" else x
                         ny = y if richtung == "h" else y + j
-                        if 0 <= nx < FELD_GROESSE and 0 <= ny < FELD_GROESSE:
-                            pos = ny * FELD_GROESSE + nx
+                        if 0 <= nx < feld_groesse and 0 <= ny < feld_groesse:
+                            pos = ny * feld_groesse + nx
                             if feld[pos] == "~":
                                 pos_liste.append(pos)
                             else:
