@@ -3,8 +3,6 @@ from funktionen import *
 from funktionen import feld_groesse  # ganz oben einfügen
 
 
-
-
 def client():
     host = input("🔌 Server-IP eingeben: ")
     port = 12345
@@ -39,11 +37,11 @@ def client():
                 feld_client[pos] = "X"
                 schuss_status = "treffer"
                 print("🚨 Dein Schiff wurde getroffen!")
-            elif feld_client[pos] in ["X", "0"]:
+            elif feld_client[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
                 print("❗ Doppelschuss!")
             else:
-                feld_client[pos] = "0"
+                feld_client[pos] = "⭕"
                 schuss_status = "verfehlt"
                 print("💨 Gegner hat verfehlt.")
             senden(s, (feld_client, schuss_status))
@@ -86,11 +84,4 @@ def client():
                 break  
             
 
-
-                
-
-
-            
-
-if __name__ == "__main__":
-    client()
+client()

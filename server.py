@@ -74,11 +74,11 @@ def server():
                 feld_server[pos] = "X"
                 schuss_status = "treffer"
                 print("🚨 Treffer auf dein Schiff!")
-            elif feld_server[pos] in ["X", "0"]:
+            elif feld_server[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
                 print("❗ Doppelschuss auf bereits getroffene Stelle.")
             else:
-                feld_server[pos] = "0"
+                feld_server[pos] = "⭕"
                 schuss_status = "verfehlt"
                 print("💨 Gegner hat verfehlt.")
             senden(conn, (feld_server, schuss_status))
