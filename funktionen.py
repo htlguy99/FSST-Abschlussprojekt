@@ -5,32 +5,46 @@ feld_groesse = 10
 def spielfeld():
     return ["~"] * (feld_groesse * feld_groesse)
 
-# Mehr Schiffe
+# Schiffe mit Länge und Anzahl
 schiffe = {
-    "Schlachtschiff": {"laenge": 5, "anzahl": 1},
-    "Kreuzer": {"laenge": 4, "anzahl": 1},
-    "Zerstörer": {"laenge": 3, "anzahl": 1},
-    "U-Boot": {"laenge": 2, "anzahl": 1}
+    "🚢 Schlachtschiff": {"laenge": 5, "anzahl": 1},
+    "🛳️ Kreuzer": {"laenge": 4, "anzahl": 1},
+    "🚤 Zerstörer": {"laenge": 3, "anzahl": 1},
+    "🛶 U-Boot": {"laenge": 2, "anzahl": 1}
 }
 
 def zeige_feld(feld, verdeckt=False):
-    print("  " + " ".join(str(i) for i in range(feld_groesse)))
+    print("   " + " ".join(str(i) for i in range(feld_groesse)))
     for y in range(feld_groesse):
         reihe = feld[y * feld_groesse:(y + 1) * feld_groesse]
         if verdeckt:
-            reihe = ["~" if c == "S" else c for c in reihe]
-        print(f"{y} " + " ".join(reihe))
+            reihe = ["🌊" if c == "S" else ersetze_symbol(c) for c in reihe]
+        else:
+            reihe = [ersetze_symbol(c) for c in reihe]
+        print(f"{y:2} " + " ".join(reihe))
+
+def ersetze_symbol(z):
+    if z == "~":
+        return "🌊"
+    elif z == "S":
+        return "🚢"
+    elif z == "X":
+        return "💥"
+    elif z == "O":
+        return "⭕"
+    else:
+        return z
 
 def verloren(feld):
     return "S" not in feld
 
 def schiff_setzen(feld):
-    print("Setze deine Schiffe:")
+    print("🚢 Setze deine Schiffe:")
     for name, info in schiffe.items():
         for i in range(info["anzahl"]):
             while True:
                 zeige_feld(feld)
-                eingabe = input(f"{name} (Länge {info['laenge']}) {i+1}, Koordinaten + Richtung (x y h/v): ").split()
+                eingabe = input(f"{name} (Länge {info['laenge']}) #{i+1} - Koordinaten + Richtung (x y h/v): ").split()
                 if len(eingabe) != 3:
                     print("❌ Drei Eingaben nötig: x y h/v")
                     continue
@@ -65,11 +79,10 @@ def schiff_setzen(feld):
 
                     for pos in pos_liste:
                         feld[pos] = "S"
+                    print("✅ Schiff platziert!")
                     break
                 except ValueError:
                     print("❌ Ungültige Eingabe!")
-
-
 
 def senden(conn, data):
     conn.sendall(pickle.dumps(data))
@@ -79,11 +92,11 @@ def empfangen(conn):
 
 def spielwiederholen():
     if verloren(spielfeld()):
-        antwort = input("Neues Spiel starten? (j/n): ").strip().lower()
+        antwort = input("🔁 Neues Spiel starten? (j/n): ").strip().lower()
         if antwort in ["j", "ja"]:
             return True
         elif antwort in ["n", "nein"]:
+            print("👋 Auf Wiedersehen!")
             return False
         else:
-            print("Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
-
+            print("❌ Ungültige Eingabe! Bitte 'j' oder 'n' eingeben.")
