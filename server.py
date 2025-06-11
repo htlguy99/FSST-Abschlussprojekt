@@ -4,7 +4,6 @@ from funktionen import feld_groesse
 
 
 def lokale_ip():
-    """Ermittelt die lokale IP-Adresse des Servers."""
     try:
         hostname = socket.gethostname()
         local_ip = socket.gethostbyname(hostname)
@@ -14,12 +13,7 @@ def lokale_ip():
 
 
 def server():
-    """Startet einen Server-Socket auf der lokalen IP-Adresse."""
     host = lokale_ip()  # Funktion aufrufen!
-    if isinstance(host, str) and host.startswith("Fehler"):
-        print(host)
-        return
-
     port = 12345
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
