@@ -98,6 +98,7 @@ def client():
                 print("💥 Du hast verloren.")
                 senden(s, "verloren")
                 break  
+        bewertung()
             
 
 client()

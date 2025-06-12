@@ -7,6 +7,7 @@ Autoren: Myron, Niklas und Volkan
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
+from PIL import Image
 
 
 def lokale_ip():
@@ -102,5 +103,6 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
+        bewertung()
 
 server()
