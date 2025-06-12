@@ -18,8 +18,13 @@ def client():
 
         feld_client = spielfeld()
         name=name_spieler()
-        print(f"👤 Spielername: {name}")
-        schiff_setzen(feld_client) 
+        print(f" Spielername: {name}")
+        print("Möchtest du eine Spielanleitung sehen? (ja/nein)")
+        if input().strip().lower() == "ja":
+            spielanleitung()    
+        else:
+            print("Ok, viel Spaß beim Spielen!")
+        schiff_setzen(feld_client, name)
 
         senden(s, feld_client)
         feld_server = empfangen(s)
@@ -41,7 +46,7 @@ def client():
             if feld_client[pos] == "S":
                 feld_client[pos] = "X"
                 schuss_status = "treffer"
-                print(" Dein Schiff wurde getroffen!")
+                print("🚨 Dein Schiff wurde getroffen!")
             elif feld_client[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
                 print("❗ Doppelschuss!")
@@ -60,7 +65,7 @@ def client():
 
             # Jetzt Client schießt
             zeige_beide_felder(feld_client, feld_server)
-            print(" Dein Zug!")
+            print("🎯 Dein Zug!")
             while True:
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
@@ -75,7 +80,7 @@ def client():
             senden(s, (x, y))
 
             feld_server, schuss_status = empfangen(s)
-            print(f" Gegnerisches Feld aktualisiert.")
+            print(f"🛠️ Gegnerisches Feld aktualisiert.")
             if schuss_status == "treffer":
                 print("🚀 Treffer!")
             elif schuss_status == "verfehlt":
