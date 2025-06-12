@@ -1,6 +1,7 @@
 
 import socket
 from funktionen import *
+import keyboard
 
 
 def client():
@@ -67,6 +68,10 @@ def client():
             zeige_beide_felder(feld_client, feld_server)
             print("🎯 Dein Zug!")
             while True:
+                if keyboard.is_pressed('esc'):
+                    print("❌ Spiel abgebrochen.")
+                senden(s, "verloren")
+                break
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
                     
@@ -77,10 +82,6 @@ def client():
                     
                 except:
                     print("Ungültige Eingabe!")
-            if keyboard.is_pressed('esc'):
-                print("❌ Spiel abgebrochen.")
-                senden(s, "verloren")
-                break
             senden(s, (x, y))
 
             feld_server, schuss_status = empfangen(s)

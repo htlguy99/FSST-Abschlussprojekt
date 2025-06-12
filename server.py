@@ -43,6 +43,10 @@ def server():
             # Server schießt
             zeige_beide_felder(feld_server, feld_client)
             while True:
+                if keyboard.is_pressed('esc'):
+                    print("❌ Spiel abgebrochen.")
+                    senden(conn, "verloren")
+                break
                 try:
                     x, y = map(int, input(" Dein Schuss (x y): ").split())
                     
@@ -52,10 +56,7 @@ def server():
                 except:
                     print("❌ Ungültige Eingabe!")
             zeige_beide_felder(feld_client, feld_server)  # 🔧 NEU
-            if keyboard.is_pressed('esc'):
-                print("❌ Spiel abgebrochen.")
-                senden(conn, "verloren")
-                break
+            
             senden(conn, (x, y))
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
