@@ -86,7 +86,7 @@ def server():
                 print(" Treffer auf dein Schiff!")
             elif feld_server[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
-                print("❗ Doppelschuss auf bereits getroffene Stelle.")
+                print(" Doppelschuss auf bereits getroffene Stelle.")
             else:
                 feld_server[pos] = "⭕"
                 schuss_status = "verfehlt"
