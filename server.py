@@ -2,7 +2,7 @@
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
-import keyboard
+
 
 def lokale_ip():
     try:
@@ -52,7 +52,7 @@ def server():
                 except:
                     print("❌ Ungültige Eingabe!")
             zeige_beide_felder(feld_client, feld_server)  # 🔧 NEU
-            
+
             senden(conn, (x, y))
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
