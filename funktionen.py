@@ -2,24 +2,30 @@
 import pickle
 from PIL import Image
 
+
 feld_groesse = 10
 
 def spielfeld():
     return ["~"] * (feld_groesse * feld_groesse)
 
 # Schiffe mit Länge und Anzahl
+#volkan
 schiffe = {
     "🚢 Schlachtschiff": {"laenge": 1, "anzahl": 1},
     "🛳️ Kreuzer": {"laenge": 1, "anzahl": 1},
     "🚤 Zerstörer": {"laenge": 1, "anzahl": 1},
     "🛶 U-Boot": {"laenge": 1, "anzahl": 1}
 }
+
+#volkan
 def name_spieler():
     name = input(" Gib deinen Spielernamen ein: ").strip()
     if not name:
         print("❌ Kein Name eingegeben. Bitte versuche es erneut.")
         return name_spieler()
     return name
+
+#volkan
 def zeige_feld(feld, verdeckt=False):
     # Spaltenkopf
     print("    " + "  ".join(f"{i}" for i in range(feld_groesse)))  # Zwei Leerzeichen statt einem
@@ -32,6 +38,7 @@ def zeige_feld(feld, verdeckt=False):
         print(f"{y:2} " + "".join(f"{z:<2}" for z in reihe))
 
 
+#volkan
 def bewertung():
     print("Hat dir das Spiel gefallen? (ja/nein)")
     if input().strip().lower() == "ja":
@@ -43,7 +50,7 @@ def bewertung():
             print("Bild konnte nicht angezeigt werden:", e)
     else:
         print("Schade :( )")
-
+#volkan
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
     print("\n📌 Dein Feld".ljust(40) +        "🧭 Gegnerisches Feld")
     print("\n Dein Feld".ljust(40) + " Gegnerisches Feld")
@@ -82,7 +89,7 @@ def spielchat():
 
 
 
-
+#volkan
 def spielanleitung():
     print("Spielanleitung:")
     print("1. Jeder Spieler platziert seine Schiffe auf einem 10x10 Feld.")
@@ -92,7 +99,7 @@ def spielanleitung():
     print("5. Treffer werden mit '💥', verfehlte Schüsse mit '⭕' markiert.")
     print("6. Das Spiel endet, wenn alle Schiffe eines Spielers versenkt sind.")
 
-
+#niklas
 def ersetze_symbol(z):
     if z == "~":
         return "🌊"
@@ -108,6 +115,8 @@ def ersetze_symbol(z):
 def verloren(feld):
     return "S" not in feld
 
+
+#myron
 def schiff_setzen(feld, name):
     print(f"{name} Setze deine Schiffe:")
     for name, info in schiffe.items():
