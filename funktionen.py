@@ -3,7 +3,6 @@ Titel: Funktionen-Code für Schiffe versenken
 Autoren: Myron, Niklas und Volkan
 """
 
-
 import pickle
 from PIL import Image
 

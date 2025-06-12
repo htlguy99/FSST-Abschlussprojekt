@@ -30,13 +30,14 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
+        #volkan bis zeile 46
         feld_server = spielfeld()
+        name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
         if input().strip().lower() == "ja":
             spielanleitung()
         else:
             print("Ok viel Spaß beim Spielen!")
-        name = name_spieler()
         print(f"Spielername: {name}")
         schiff_setzen(feld_server, name)
         senden(conn, feld_server)
