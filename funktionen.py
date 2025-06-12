@@ -1,5 +1,6 @@
 
 import pickle
+from PIL import Image
 
 feld_groesse = 10
 
@@ -31,13 +32,21 @@ def zeige_feld(feld, verdeckt=False):
         print(f"{y:2} " + "".join(f"{z:<2}" for z in reihe))
 
 
+def bewertung():
+    print("Hat dir das Spiel gefallen? (ja/nein)")
+    if input().strip().lower() == "ja":
+        print("Danke fürs Spielen!")
+        try:
+            bild = Image.open("nmv.jpg")  # Stelle sicher, dass die Datei existiert
+            bild.show()
+        except Exception as e:
+            print("Bild konnte nicht angezeigt werden:", e)
+    else:
+        print("Schade :( )")
 
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
-<<<<<<< HEAD
     print("\n📌 Dein Feld".ljust(40) +        "🧭 Gegnerisches Feld")
-=======
     print("\n Dein Feld".ljust(40) + " Gegnerisches Feld")
->>>>>>> a7c97d8b2c3e50ba0b30f80b52f08cd8192af565
     # Kopfzeile für beide Felder (Spaltennummern)
     spaltenkopf= "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) # Zwei Leerzeichen zwischen den Feldern für bessere Trennung
     spaltenkopf2 = "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) # Zwei Leerzeichen zwischen den Feldern für bessere Trennung
