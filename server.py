@@ -2,6 +2,8 @@
 Titel: Server-Code für Schiffe versenken
 Autoren: Myron, Niklas und Volkan
 """
+
+
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
