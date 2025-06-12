@@ -66,7 +66,7 @@ def client():
 
             # Jetzt Client schießt
             zeige_beide_felder(feld_client, feld_server)
-            print("🎯 Dein Zug!")
+            print(" Dein Zug!")
             while True:
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
