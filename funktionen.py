@@ -1,3 +1,4 @@
+
 import pickle
 
 feld_groesse = 10
@@ -12,7 +13,12 @@ schiffe = {
     "🚤 Zerstörer": {"laenge": 1, "anzahl": 1},
     "🛶 U-Boot": {"laenge": 1, "anzahl": 1}
 }
-
+def name_spieler():
+    name = input("👤 Gib deinen Spielernamen ein: ").strip()
+    if not name:
+        print("❌ Kein Name eingegeben. Bitte versuche es erneut.")
+        return name_spieler()
+    return name
 def zeige_feld(feld, verdeckt=False):
     print("   " + " ".join(str(i) for i in range(feld_groesse)))
     for y in range(feld_groesse):
@@ -22,6 +28,23 @@ def zeige_feld(feld, verdeckt=False):
         else:
             reihe = [ersetze_symbol(c) for c in reihe]
         print(f"{y:2} " + " ".join(reihe))
+
+
+def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
+    print("\n📌 Dein Feld".ljust(30) + "🧭 Gegnerisches Feld")
+    print("   " + " ".join(str(i) for i in range(feld_groesse)) + "    " + " ".join(str(i) for i in range(feld_groesse)))
+    for y in range(feld_groesse):
+        eigene_reihe = [ersetze_symbol(z) for z in eigenes_feld[y * feld_groesse:(y + 1) * feld_groesse]]
+        gegner_reihe = []
+        for z in gegnerisches_feld[y * feld_groesse:(y + 1) * feld_groesse]:
+            if z == "X":
+                gegner_reihe.append("💥")
+            elif z == "⭕":
+                gegner_reihe.append("⭕")
+            else:
+                gegner_reihe.append("🌊")
+        print(f"{y:2} {' '.join(eigene_reihe)}    {y:2} {' '.join(gegner_reihe)}")
+
 
 def ersetze_symbol(z):
     if z == "~":
@@ -39,7 +62,7 @@ def verloren(feld):
     return "S" not in feld
 
 def schiff_setzen(feld):
-    print("🚢 Setze deine Schiffe:")
+    print(f"{name} Setze deine Schiffe:")
     for name, info in schiffe.items():
         for i in range(info["anzahl"]):
             while True:
@@ -89,4 +112,3 @@ def senden(conn, data):
 
 def empfangen(conn):
     return pickle.loads(conn.recv(4096))
-##

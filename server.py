@@ -1,6 +1,7 @@
+
 import socket
 from funktionen import *
-from funktionen import feld_groesse  
+from funktionen import feld_groesse 
 
 
 def lokale_ip():
@@ -24,6 +25,8 @@ def server():
         print(" Verbunden mit:", addr)
 
         feld_server = spielfeld()
+        name = name_spieler()
+        print(f"👤 Spielername: {name}")
         schiff_setzen(feld_server)
         senden(conn, feld_server)
 
@@ -31,23 +34,25 @@ def server():
         print(" Gegnerisches Feld empfangen.")
 
         while True:
+            zeige_beide_felder(feld_server, feld_client)
             # Server schießt
-            zeige_feld(feld_client, verdeckt=True)
+            zeige_beide_felder(feld_server, feld_client)
             while True:
                 try:
                     x, y = map(int, input(" Dein Schuss (x y): ").split())
                     
                     if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
-                    print("❌ Nur Koordinaten 0–10!")
+                    print("❌ Nur Koordinaten 0–9!")
                 except:
                     print("❌ Ungültige Eingabe!")
+            zeige_beide_felder(feld_client, feld_server)  # 🔧 NEU
 
             senden(conn, (x, y))
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
             feld_client, status = empfangen(conn)
-            print(f" Gegnerisches Feld aktualisiert.")
+            print(f"🛠️ Gegnerisches Feld aktualisiert.")
             if status == "treffer":
                 print("🚀 Treffer!")
             elif status == "verfehlt":
@@ -63,7 +68,7 @@ def server():
                 senden(conn, "weiter")
 
             # Gegner schießt
-            print(" Warte auf gegnerischen Schuss...")
+            print("⏳ Warte auf gegnerischen Schuss...")
             data = empfangen(conn)
             if data == "verloren":
                 print("💥 Du hast verloren.")
@@ -87,3 +92,9 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
+
+            # Frage nach einer neuen Runde
+           
+
+
+server()

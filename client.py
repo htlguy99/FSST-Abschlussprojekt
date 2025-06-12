@@ -1,6 +1,6 @@
+
 import socket
 from funktionen import *
-from funktionen import feld_groesse  # ganz oben einfügen
 
 
 def client():
@@ -17,6 +17,8 @@ def client():
         print(" Verbunden mit Server.")
 
         feld_client = spielfeld()
+        name=name_spieler()
+        print(f"👤 Spielername: {name}")
         schiff_setzen(feld_client) 
 
         senden(s, feld_client)
@@ -24,6 +26,9 @@ def client():
         print(" Gegnerisches Feld erhalten.")
 
         while True:
+            
+            zeige_beide_felder(feld_client, feld_server)
+
             # Warten auf Schuss des Servers
             print(" Warte auf Schuss des Gegners...")
             data = empfangen(s)
@@ -54,7 +59,7 @@ def client():
                 print(f"Unbekannter Status: {status}")
 
             # Jetzt Client schießt
-            zeige_feld(feld_server, verdeckt=True)
+            zeige_beide_felder(feld_client, feld_server)
             print("🎯 Dein Zug!")
             while True:
                 try:
