@@ -20,14 +20,19 @@ def server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
-        print(f" Server läuft. Warte auf Verbindung auf {host} und Port {port}...")
+        print(f"🟢 Server läuft. Warte auf Verbindung auf {host} und Port {port}...")
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
         feld_server = spielfeld()
+        print("Möchtest du eine spielanleitung sehen? (ja/nein)")
+        if input().strip().lower() == "ja":
+            spielanleitung()
+        else:
+            print("Ok viel Spaß beim Spielen!")
         name = name_spieler()
-        print(f"👤 Spielername: {name}")
-        schiff_setzen(feld_server)
+        print(f"Spielername: {name}")
+        schiff_setzen(feld_server, name)
         senden(conn, feld_server)
 
         feld_client = empfangen(conn)
@@ -52,7 +57,7 @@ def server():
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
             feld_client, status = empfangen(conn)
-            print(f" Gegnerisches Feld aktualisiert.")
+            print(f"🛠️ Gegnerisches Feld aktualisiert.")
             if status == "treffer":
                 print("🚀 Treffer!")
             elif status == "verfehlt":
@@ -71,14 +76,14 @@ def server():
             print("⏳ Warte auf gegnerischen Schuss...")
             data = empfangen(conn)
             if data == "verloren":
-                print(" Du hast verloren.")
+                print("💥 Du hast verloren.")
                 break
             x, y = data
             pos = y * feld_groesse + x
             if feld_server[pos] == "S":
                 feld_server[pos] = "X"
                 schuss_status = "treffer"
-                print(" Treffer auf dein Schiff!")
+                print("🚨 Treffer auf dein Schiff!")
             elif feld_server[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
                 print("❗ Doppelschuss auf bereits getroffene Stelle.")
