@@ -2,6 +2,7 @@
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
+from PIL import Image
 
 
 def lokale_ip():
@@ -97,11 +98,7 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
-            print("hat dir das Spiel gefallen? (ja/nein)")
-            if input().strip().lower() == "ja":
-                print("Danke fürs Spielen!")
-            else:
-                print("Schade :( )")
+        bewertung()
 
             
            
