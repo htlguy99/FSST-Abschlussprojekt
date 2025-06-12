@@ -1,3 +1,8 @@
+"""
+Titel: Funktionen-Code für Schiffe versenken
+Autoren: Myron, Niklas und Volkan
+"""
+
 
 import pickle
 from PIL import Image
@@ -82,11 +87,6 @@ def spielchat():
             print("Chat beendet.")
             break
         print(f"🗨️ {nachricht}")
-
-
-
-
-
 
 
 #volkan
