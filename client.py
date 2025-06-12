@@ -68,10 +68,6 @@ def client():
             zeige_beide_felder(feld_client, feld_server)
             print("🎯 Dein Zug!")
             while True:
-                if keyboard.is_pressed('esc'):
-                    print("❌ Spiel abgebrochen.")
-                senden(s, "verloren")
-                break
                 try:
                     x, y = map(int, input("Schuss (x y): ").split())
                     
