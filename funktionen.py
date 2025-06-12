@@ -14,7 +14,7 @@ schiffe = {
     "🛶 U-Boot": {"laenge": 1, "anzahl": 1}
 }
 def name_spieler():
-    name = input("👤 Gib deinen Spielernamen ein: ").strip()
+    name = input(" Gib deinen Spielernamen ein: ").strip()
     if not name:
         print("❌ Kein Name eingegeben. Bitte versuche es erneut.")
         return name_spieler()
@@ -55,6 +55,14 @@ def spielchat():
             break
         print(f"🗨️ {nachricht}")
 
+def spielanleitung():
+    print("Spielanleitung:")
+    print("1. Jeder Spieler platziert seine Schiffe auf einem 10x10 Feld.")
+    print("2. Schiffe können horizontal oder vertikal platziert werden.")
+    print("3. Ein Schiff kann nicht überlappen oder außerhalb des Feldes platziert werden.")
+    print("4. Spieler schießen abwechselnd auf das gegnerische Feld.")
+    print("5. Treffer werden mit '💥', verfehlte Schüsse mit '⭕' markiert.")
+    print("6. Das Spiel endet, wenn alle Schiffe eines Spielers versenkt sind.")
 
 
 def ersetze_symbol(z):
@@ -72,7 +80,7 @@ def ersetze_symbol(z):
 def verloren(feld):
     return "S" not in feld
 
-def schiff_setzen(feld):
+def schiff_setzen(feld, name):
     print(f"{name} Setze deine Schiffe:")
     for name, info in schiffe.items():
         for i in range(info["anzahl"]):
