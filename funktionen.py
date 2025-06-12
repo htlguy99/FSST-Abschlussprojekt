@@ -37,7 +37,11 @@ def zeige_feld(feld, verdeckt=False):
             reihe = [ersetze_symbol(c) for c in reihe]
         print(f"{y:2} " + "".join(f"{z:<2}" for z in reihe))
 
+
 #volkan
+
+
+
 def bewertung():
     print("Hat dir das Spiel gefallen? (ja/nein)")
     if input().strip().lower() == "ja":
