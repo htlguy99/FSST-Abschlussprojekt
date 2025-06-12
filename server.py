@@ -20,7 +20,7 @@ def server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
-        print(f"🟢 Server läuft. Warte auf Verbindung auf {host} und Port {port}...")
+        print(f" Server läuft. Warte auf Verbindung auf {host} und Port {port}...")
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
@@ -51,13 +51,13 @@ def server():
                     print("❌ Nur Koordinaten 0–9!")
                 except:
                     print("❌ Ungültige Eingabe!")
-            zeige_beide_felder(feld_client, feld_server)  # 🔧 NEU
+            zeige_beide_felder(feld_client, feld_server)  #  NEU
 
             senden(conn, (x, y))
 
             # Empfang aktualisiertes Gegnerfeld + Rückmeldung
             feld_client, status = empfangen(conn)
-            print(f"🛠️ Gegnerisches Feld aktualisiert.")
+            print(f" Gegnerisches Feld aktualisiert.")
             if status == "treffer":
                 print("🚀 Treffer!")
             elif status == "verfehlt":
@@ -73,7 +73,7 @@ def server():
                 senden(conn, "weiter")
 
             # Gegner schießt
-            print("⏳ Warte auf gegnerischen Schuss...")
+            print(" Warte auf gegnerischen Schuss...")
             data = empfangen(conn)
             if data == "verloren":
                 print("💥 Du hast verloren.")
@@ -83,10 +83,10 @@ def server():
             if feld_server[pos] == "S":
                 feld_server[pos] = "X"
                 schuss_status = "treffer"
-                print("🚨 Treffer auf dein Schiff!")
+                print(" Treffer auf dein Schiff!")
             elif feld_server[pos] in ["X", "⭕"]:
                 schuss_status = "doppelschuss"
-                print("❗ Doppelschuss auf bereits getroffene Stelle.")
+                print(" Doppelschuss auf bereits getroffene Stelle.")
             else:
                 feld_server[pos] = "⭕"
                 schuss_status = "verfehlt"
@@ -98,7 +98,7 @@ def server():
                 senden(conn, "verloren")
                 break
 
-            # Frage nach einer neuen Runde
+            
            
 
 
