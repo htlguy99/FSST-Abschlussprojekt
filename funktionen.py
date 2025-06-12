@@ -45,6 +45,17 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
                 gegner_reihe.append("🌊")
         print(f"{y:2} {' '.join(eigene_reihe)}    {y:2} {' '.join(gegner_reihe)}")
 
+def spielchat():
+    print("💬 Willkommen im Spielchat!")
+    print("Tippe 'exit' zum Beenden.")
+    while True:
+        nachricht = input("Nachricht: ")
+        if nachricht.lower() == "exit":
+            print("Chat beendet.")
+            break
+        print(f"🗨️ {nachricht}")
+
+
 
 def ersetze_symbol(z):
     if z == "~":
