@@ -97,6 +97,11 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
+            print("hat dir das Spiel gefallen? (ja/nein)")
+            if input().strip().lower() == "ja":
+                print("Danke fürs Spielen!")
+            else:
+                print("Schade :( )")
 
             
            
