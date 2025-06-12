@@ -74,9 +74,13 @@ def client():
                         break
                     else:
                         print("Nur Koordinaten 0-9!")
+                    
                 except:
                     print("Ungültige Eingabe!")
-
+            if keyboard.is_pressed('esc'):
+                print("❌ Spiel abgebrochen.")
+                senden(s, "verloren")
+                break
             senden(s, (x, y))
 
             feld_server, schuss_status = empfangen(s)
