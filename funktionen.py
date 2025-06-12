@@ -33,7 +33,7 @@ def zeige_feld(feld, verdeckt=False):
 
 
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
-    print("\n📌 Dein Feld".ljust(40) + "🧭 Gegnerisches Feld")
+    print("\n Dein Feld".ljust(40) + " Gegnerisches Feld")
     # Kopfzeile für beide Felder (Spaltennummern)
     spaltenkopf = "   " + "".join(f"{i:^3}" for i in range(feld_groesse))
     print(spaltenkopf + "    "*10 + spaltenkopf)
