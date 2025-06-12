@@ -20,19 +20,25 @@ def name_spieler():
         return name_spieler()
     return name
 def zeige_feld(feld, verdeckt=False):
-    print("   " + " ".join(str(i) for i in range(feld_groesse)))
+    # Spaltenkopf
+    print("    " + "  ".join(f"{i}" for i in range(feld_groesse)))  # Zwei Leerzeichen statt einem
     for y in range(feld_groesse):
         reihe = feld[y * feld_groesse:(y + 1) * feld_groesse]
         if verdeckt:
             reihe = ["🌊" if c == "S" else ersetze_symbol(c) for c in reihe]
         else:
             reihe = [ersetze_symbol(c) for c in reihe]
-        print(f"{y:2} " + " ".join(reihe))
+        print(f"{y:2} " + "".join(f"{z:<2}" for z in reihe))
+
 
 
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
-    print("\n📌 Dein Feld".ljust(30) + "🧭 Gegnerisches Feld")
-    print("   " + " ".join(str(i) for i in range(feld_groesse)) + "    " + " ".join(str(i) for i in range(feld_groesse)))
+    print("\n📌 Dein Feld".ljust(40) + "🧭 Gegnerisches Feld")
+    # Kopfzeile für beide Felder (Spaltennummern)
+    spaltenkopf = "   " + "".join(f"{i:<3}" for i in range(feld_groesse))
+    print(spaltenkopf + "    " + spaltenkopf)
+
+    # Zeilen
     for y in range(feld_groesse):
         eigene_reihe = [ersetze_symbol(z) for z in eigenes_feld[y * feld_groesse:(y + 1) * feld_groesse]]
         gegner_reihe = []
@@ -43,7 +49,8 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
                 gegner_reihe.append("⭕")
             else:
                 gegner_reihe.append("🌊")
-        print(f"{y:2} {' '.join(eigene_reihe)}    {y:2} {' '.join(gegner_reihe)}")
+        print(f"{y:<2} " + "".join(f"{z:<3}" for z in eigene_reihe) + "    " + f"{y:<2} " + "".join(f"{z:<3}" for z in gegner_reihe))
+
 
 def spielchat():
     print("💬 Willkommen im Spielchat!")
@@ -54,6 +61,13 @@ def spielchat():
             print("Chat beendet.")
             break
         print(f"🗨️ {nachricht}")
+
+
+
+
+
+
+
 
 def spielanleitung():
     print("Spielanleitung:")
