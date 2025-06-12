@@ -39,7 +39,7 @@ def server():
                     
                     if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
-                    print("❌ Nur Koordinaten 0–4!")
+                    print("❌ Nur Koordinaten 0–10!")
                 except:
                     print("❌ Ungültige Eingabe!")
 
