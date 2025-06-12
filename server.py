@@ -1,3 +1,8 @@
+"""
+Titel: Server-Code für Schiffe versenken
+Autoren: Myron, Niklas und Volkan
+"""
+
 
 import socket
 from funktionen import *
@@ -99,9 +104,5 @@ def server():
                 senden(conn, "verloren")
                 break
         bewertung()
-
-            
-           
-
 
 server()
