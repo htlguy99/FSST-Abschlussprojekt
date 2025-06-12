@@ -15,10 +15,10 @@ def spielfeld():
 # Schiffe mit Länge und Anzahl
 #volkan
 schiffe = {
-    "🚢 Schlachtschiff": {"laenge": 1, "anzahl": 1},
-    "🛳️ Kreuzer": {"laenge": 1, "anzahl": 1},
-    "🚤 Zerstörer": {"laenge": 1, "anzahl": 1},
-    "🛶 U-Boot": {"laenge": 1, "anzahl": 1}
+    "🚢 Schlachtschiff": {"laenge": 5, "anzahl": 1},
+    "🛳️ Kreuzer": {"laenge": 4, "anzahl": 1},
+    "🚤 Zerstörer": {"laenge": 3, "anzahl": 1},
+    "🛶 U-Boot": {"laenge": 2, "anzahl": 1}
 }
 
 #volkan

@@ -13,6 +13,8 @@ def client():
     host = input("🔌 Server-IP eingeben: ")
     port = 12345
 
+    
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
             s.connect((host, port))
@@ -29,7 +31,8 @@ def client():
         if input().strip().lower() == "ja":
             spielanleitung()    
         else:
-            print("Ok, viel Spaß beim Spielen!")
+            print("Ok, du kannst es jederzeit mit 'm' aufrufen. Viel Spaß beim Spielen!")
+        
         schiff_setzen(feld_client, name)
 
         senden(s, feld_client)
@@ -37,7 +40,6 @@ def client():
         print(" Gegnerisches Feld erhalten.")
 
         while True:
-            
             zeige_beide_felder(feld_client, feld_server)
 
             # Warten auf Schuss des Servers

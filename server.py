@@ -23,6 +23,8 @@ def server():
     host = lokale_ip()  # Funktion aufrufen!
     port = 12345
 
+    
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
