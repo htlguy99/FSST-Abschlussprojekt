@@ -31,7 +31,7 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
-        #volkan bis zeile 44
+        
         feld_server = spielfeld()
         name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
