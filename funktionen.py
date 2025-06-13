@@ -17,10 +17,10 @@ def spielfeld():
 # Schiffe mit Länge und Anzahl
 #volkan
 schiffe = {
-    "🚢 Schlachtschiff": {"laenge": 5, "anzahl": 1},
-    "🛳️ Kreuzer": {"laenge": 4, "anzahl": 1},
-    "🚤 Zerstörer": {"laenge": 3, "anzahl": 1},
-    "🛶 U-Boot": {"laenge": 2, "anzahl": 1}
+    "🚢 Schlachtschiff": {"laenge": 1, "anzahl": 1},
+    "🛳️ Kreuzer": {"laenge": 1, "anzahl": 1},
+    "🚤 Zerstörer": {"laenge": 1, "anzahl": 1},
+    "🛶 U-Boot": {"laenge": 1, "anzahl": 1}
 }
 
 #volkan
@@ -70,7 +70,7 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
         eigene_reihe = [ersetze_symbol(z) for z in eigenes_feld[y * feld_groesse:(y + 1) * feld_groesse]]
         gegner_reihe = []
         for z in gegnerisches_feld[y * feld_groesse:(y + 1) * feld_groesse]:
-            if z == "💥":
+            if z == "X":
                 gegner_reihe.append("💥")
             elif z == "⭕":
                 gegner_reihe.append("⭕")

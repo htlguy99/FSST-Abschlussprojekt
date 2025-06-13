@@ -48,18 +48,16 @@ def server():
 
         while True:
             zeige_beide_felder(feld_server, feld_client)
-            # Server schießt
-            zeige_beide_felder(feld_server, feld_client)
             while True:
                 try:
                     x, y = map(int, input(" Dein Schuss (x y): ").split())
                     
                     if 0 <= x < feld_groesse and 0 <= y < feld_groesse:
                         break
-                    print("❌ Nur Koordinaten 0–9!")
+                    print("❌ Nur Koordinaten 0-9!")
                 except:
                     print("❌ Ungültige Eingabe!")
-            zeige_beide_felder(feld_client, feld_server)  #  NEU
+            zeige_beide_felder(feld_client, feld_server) 
 
             senden(conn, (x, y))
 
@@ -75,7 +73,7 @@ def server():
 
             if verloren(feld_client):
                 print("🏆 Du hast gewonnen!")
-                senden(conn, "verloren")
+                senden(conn, "verloren :( )")
                 break
             else:
                 senden(conn, "weiter")
@@ -84,7 +82,7 @@ def server():
             print(" Warte auf gegnerischen Schuss...")
             data = empfangen(conn)
             if data == "verloren":
-                print(" Du hast verloren.")
+                print(" Du hast verloren :( )")
                 break
             x, y = data
             pos = y * feld_groesse + x
