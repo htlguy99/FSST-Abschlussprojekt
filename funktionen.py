@@ -111,6 +111,7 @@ def ersetze_symbol(z):
     else:
         return z
 
+#niklas
 def verloren(feld):
     return "S" not in feld
 

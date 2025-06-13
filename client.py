@@ -31,8 +31,8 @@ def client():
         if input().strip().lower() == "ja":
             spielanleitung()    
         else:
-            print("Ok, du kannst es jederzeit mit 'm' aufrufen. Viel Spaß beim Spielen!")
-        
+            print("Ok, Viel Spaß beim Spielen!")
+
         schiff_setzen(feld_client, name)
 
         senden(s, feld_client)
