@@ -90,11 +90,11 @@ def client():
             feld_server, schuss_status = empfangen(s)
             print(f" Gegnerisches Feld aktualisiert.")
             if schuss_status == "treffer":
-                print("🚀 Treffer!")
+                print("Treffer!")
             elif schuss_status == "verfehlt":
-                print("💨 Verfehlt!")
+                print("Verfehlt!")
             elif schuss_status == "doppelschuss":
-                print("❗ Doppelschuss!")
+                print("Doppelschuss!")
 
             if verloren(feld_server):
                 print("💥 Du hast verloren.")
