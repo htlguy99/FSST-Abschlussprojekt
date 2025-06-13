@@ -10,6 +10,7 @@ from funktionen import feld_groesse
 from PIL import Image
 
 
+# holt die lokale IP-Adresse des Servers
 def lokale_ip():
     try:
         hostname = socket.gethostname()
@@ -20,7 +21,7 @@ def lokale_ip():
 
 
 def server():
-    host = lokale_ip()  # Funktion aufrufen!
+    host = lokale_ip()
     port = 12345
 
     
