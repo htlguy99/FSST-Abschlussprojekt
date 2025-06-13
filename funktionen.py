@@ -56,7 +56,7 @@ def bewertung():
         print("Schade :( )")
 #volkan
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
-    print("\n📌 Dein Feld".ljust(50) +  "🧭 Gegnerisches Feld") 
+    print("\n Dein Feld".ljust(50) +  " Gegnerisches Feld") 
     print("\n Dein Feld".ljust(50) + " Gegnerisches Feld")
     # Kopfzeile für beide Felder (Spaltennummern)
     spaltenkopf= "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) # Zwei Leerzeichen zwischen den Feldern für bessere Trennung

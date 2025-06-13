@@ -10,6 +10,7 @@ from funktionen import feld_groesse
 from PIL import Image
 
 
+# holt die lokale IP-Adresse des Servers
 def lokale_ip():
     try:
         hostname = socket.gethostname()
@@ -20,10 +21,8 @@ def lokale_ip():
 
 
 def server():
-    host = lokale_ip()  # Funktion aufrufen!
+    host = lokale_ip()
     port = 12345
-
-    
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
@@ -32,7 +31,7 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
-        #volkan bis zeile 46
+        #volkan bis zeile 44
         feld_server = spielfeld()
         name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
