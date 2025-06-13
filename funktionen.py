@@ -78,14 +78,14 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
 
 
 def spielchat():
-    print("💬 Willkommen im Spielchat!")
+    print(" Willkommen im Spielchat!")
     print("Tippe 'exit' zum Beenden.")
     while True:
         nachricht = input("Nachricht: ")
         if nachricht.lower() == "exit":
             print("Chat beendet.")
             break
-        print(f"🗨️ {nachricht}")
+        print(f" {nachricht}")
 
 
 #volkan
