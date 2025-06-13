@@ -61,7 +61,7 @@ def client():
             else:
                 feld_client[pos] = "⭕"
                 schuss_status = "verfehlt"
-                print("💨 Gegner hat verfehlt.")
+                print(" Gegner hat verfehlt.")
             senden(s, (feld_client, schuss_status))
 
             status = empfangen(s)
