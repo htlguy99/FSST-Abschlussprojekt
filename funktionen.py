@@ -68,7 +68,7 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
         eigene_reihe = [ersetze_symbol(z) for z in eigenes_feld[y * feld_groesse:(y + 1) * feld_groesse]]
         gegner_reihe = []
         for z in gegnerisches_feld[y * feld_groesse:(y + 1) * feld_groesse]:
-            if z == "X":
+            if z == "💥":
                 gegner_reihe.append("💥")
             elif z == "⭕":
                 gegner_reihe.append("⭕")
@@ -78,14 +78,14 @@ def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
 
 
 def spielchat():
-    print(" Willkommen im Spielchat!")
+    print("💬 Willkommen im Spielchat!")
     print("Tippe 'exit' zum Beenden.")
     while True:
         nachricht = input("Nachricht: ")
         if nachricht.lower() == "exit":
             print("Chat beendet.")
             break
-        print(f" {nachricht}")
+        print(f"🗨️ {nachricht}")
 
 
 #volkan

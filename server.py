@@ -1,7 +1,13 @@
+"""
+Titel: Server-Code für Schiffe versenken
+Autoren: Myron, Niklas und Volkan
+"""
+
 
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
+from PIL import Image
 
 
 # holt die lokale IP-Adresse des Servers
@@ -25,13 +31,14 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
+        #volkan bis zeile 44
         feld_server = spielfeld()
+        name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
         if input().strip().lower() == "ja":
             spielanleitung()
         else:
             print("Ok viel Spaß beim Spielen!")
-        name = name_spieler()
         print(f"Spielername: {name}")
         schiff_setzen(feld_server, name)
         senden(conn, feld_server)
@@ -60,11 +67,11 @@ def server():
             feld_client, status = empfangen(conn)
             print(f" Gegnerisches Feld aktualisiert.")
             if status == "treffer":
-                print(" Treffer!")
+                print("🚀 Treffer!")
             elif status == "verfehlt":
-                print(" Verfehlt!")
+                print("💨 Verfehlt!")
             elif status == "doppelschuss":
-                print(" Doppelschuss!")
+                print("❗ Doppelschuss!")
 
             if verloren(feld_client):
                 print("🏆 Du hast gewonnen!")
@@ -91,14 +98,13 @@ def server():
             else:
                 feld_server[pos] = "⭕"
                 schuss_status = "verfehlt"
-                print(" Gegner hat verfehlt.")
+                print("💨 Gegner hat verfehlt.")
             senden(conn, (feld_server, schuss_status))
 
             if verloren(feld_server):
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
+        bewertung()
 
-            
-           
 server()
