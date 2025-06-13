@@ -1,13 +1,7 @@
-"""
-Titel: Server-Code für Schiffe versenken
-Autoren: Myron, Niklas und Volkan
-"""
-
 
 import socket
 from funktionen import *
 from funktionen import feld_groesse 
-from PIL import Image
 
 
 def lokale_ip():
@@ -23,8 +17,6 @@ def server():
     host = lokale_ip()  # Funktion aufrufen!
     port = 12345
 
-    
-
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
@@ -32,14 +24,13 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
-        #volkan bis zeile 46
         feld_server = spielfeld()
-        name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
         if input().strip().lower() == "ja":
             spielanleitung()
         else:
             print("Ok viel Spaß beim Spielen!")
+        name = name_spieler()
         print(f"Spielername: {name}")
         schiff_setzen(feld_server, name)
         senden(conn, feld_server)
@@ -106,6 +97,7 @@ def server():
                 print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
-        bewertung()
 
+            
+           
 server()
