@@ -5,6 +5,8 @@ Autoren: Myron, Niklas und Volkan
 
 import pickle
 from PIL import Image
+import threading
+import keyboard
 
 
 feld_groesse = 10
