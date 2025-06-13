@@ -105,7 +105,7 @@ def client():
 
 
             if verloren(feld_server):
-                print("💥 Du hast verloren.")
+                print(" Du hast gewonnen!")
                 senden(s, "verloren")
                 break  
         bewertung()
