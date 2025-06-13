@@ -78,7 +78,7 @@ def server():
                 print(" Doppelschuss!")
 
             if verloren(feld_client):
-                print("🏆 Du hast gewonnen!")
+                print("Du hast gewonnen!")
                 senden(conn, "verloren :( )")
                 break
             else:
@@ -102,11 +102,11 @@ def server():
             else:
                 feld_server[pos] = "⭕"
                 schuss_status = "verfehlt"
-                print("💨 Gegner hat verfehlt.")
+                print("Gegner hat verfehlt.")
             senden(conn, (feld_server, schuss_status))
 
             if verloren(feld_server):
-                print("💥 Deine Schiffe sind alle versenkt. Du hast verloren!")
+                print("Deine Schiffe sind alle versenkt. Du hast verloren!")
                 senden(conn, "verloren")
                 break
         bewertung()
