@@ -24,8 +24,6 @@ def server():
     host = lokale_ip()
     port = 12345
 
-    
-
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(1)
@@ -33,7 +31,7 @@ def server():
         conn, addr = s.accept()
         print(" Verbunden mit:", addr)
 
-        #volkan bis zeile 46
+        #volkan bis zeile 44
         feld_server = spielfeld()
         name = name_spieler()
         print("Möchtest du eine spielanleitung sehen? (ja/nein)")
