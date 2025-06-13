@@ -34,7 +34,7 @@ def name_spieler():
 #volkan
 def zeige_feld(feld, verdeckt=False):
     # Spaltenkopf
-    print("    " + "  ".join(f"{i}" for i in range(feld_groesse)))  # Zwei Leerzeichen statt einem
+    print("    " + "  ".join(f"{i}" for i in range(feld_groesse)))  # Zwei Leerzeichen zwischen den Spalten
     for y in range(feld_groesse):
         reihe = feld[y * feld_groesse:(y + 1) * feld_groesse]
         if verdeckt:
@@ -50,7 +50,7 @@ def bewertung():
     if input().strip().lower() == "ja":
         print("Danke fürs Spielen!")
         try:
-            bild = Image.open("nmv.jpg")  # Stelle sicher, dass die Datei existiert
+            bild = Image.open("nmv.jpg")  
             bild.show()
         except Exception as e:
             print("Bild konnte nicht angezeigt werden:", e)
@@ -60,9 +60,9 @@ def bewertung():
 def zeige_beide_felder(eigenes_feld, gegnerisches_feld):
     print("\n Dein Feld".ljust(50) +  " Gegnerisches Feld") 
     # Kopfzeile für beide Felder (Spaltennummern)
-    spaltenkopf= "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) # Zwei Leerzeichen zwischen den Feldern für bessere Trennung
-    spaltenkopf2 = "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) # Zwei Leerzeichen zwischen den Feldern für bessere Trennung
-    print(spaltenkopf + "      " + spaltenkopf2)  # Zwei Leerzeichen zwischen den Feldern für bessere Trennung
+    spaltenkopf= "   " + " ".join(f"{i:<3}" for i in range(feld_groesse))  
+    spaltenkopf2 = "   " + " ".join(f"{i:<3}" for i in range(feld_groesse)) 
+    print(spaltenkopf + "      " + spaltenkopf2) 
 
     # Zeilen
     for y in range(feld_groesse):
